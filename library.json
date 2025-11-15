@@ -1,0 +1,33 @@
+{
+  "name": "ESP32TelegramSimple",
+  "version": "1.0.0",
+  "description": " A  ESP32 library, that lets you comunicate with telegram, while keeping the usage simple and easy to understand.",
+  "keywords": [
+    "telegram",
+    "bot",
+    "esp32",
+    "wifi",
+    "messaging",
+    "lightweight",
+    "iot",
+    "simple"
+  ],
+  "authors": [
+    {
+      "name": "Zintrall",
+      "email": "zintrall@post.cz",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Zintrall/ESP32TelegramSimple",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zintrall/ESP32TelegramSimple.git"
+  },
+  "frameworks": ["arduino"],
+  "platforms": ["espressif32"],
+  "dependencies": {
+    "ArduinoJson": "^7.4.2"
+  }
+}
