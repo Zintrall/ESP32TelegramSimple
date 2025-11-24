@@ -27,39 +27,7 @@ lib_deps =
 3. Copy your bot token
 
 ### 2. SSL Certificate (optional)
-For secure communication with Telegram, you should use their SSL certificate. You can:
-- Use the certificate string provided below in your code
-- Or get the latest certificate from Telegram's servers using tools like `openssl` or online SSL checkers
-
-> **⚠️ Certificate Expiration Notice**
-> The certificate provided below expires on **June 29 2034 17:06:20 GMT**. After this date, you'll need to reflash your ESP32 with a new certificate. If you want your device to work indefinitely without manual updates, consider using insecure mode (without certificate) instead.
-
-```cpp
-const char* telegram_root_ca = R"(-----BEGIN CERTIFICATE-----
-MIIEADCCAuigAwIBAgIBADANBgkqhkiG9w0BAQUFADBjMQswCQYDVQQGEwJVUzEh
-MB8GA1UEChMYVGhlIEdvIERhZGR5IEdyb3VwLCBJbmMuMTEwLwYDVQQLEyhHbyBE
-YWRkeSBDbGFzcyAyIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MB4XDTA0MDYyOTE3
-MDYyMFoXDTM0MDYyOTE3MDYyMFowYzELMAkGA1UEBhMCVVMxITAfBgNVBAoTGFRo
-ZSBHbyBEYWRkeSBHcm91cCwgSW5jLjExMC8GA1UECxMoR28gRGFkZHkgQ2xhc3Mg
-MiBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTCCASAwDQYJKoZIhvcNAQEBBQADggEN
-ADCCAQgCggEBAN6d1+pXGEmhW+vXX0iG6r7d/+TvZxz0ZWizV3GgXne77ZtJ6XCA
-PVYYYwhv2vLM0D9/AlQiVBDYsoHUwHU9S3/Hd8M+eKsaA7Ugay9qK7HFiH7Eux6w
-wdhFJ2+qN1j3hybX2C32qRe3H3I2TqYXP2WYktsqbl2i/ojgC95/5Y0V4evLOtXi
-EqITLdiOr18SPaAIBQi2XKVlOARFmR6jYGB0xUGlcmIbYsUfb18aQr4CUWWoriMY
-avx4A6lNf4DD+qta/KFApMoZFv6yyO9ecw3ud72a9nmYvLEHZ6IVDd2gWMZEewo+
-YihfukEHU1jPEX44dMX4/7VpkI+EdOqXG68CAQOjgcAwgb0wHQYDVR0OBBYEFNLE
-sNKR1EwRcbNhyz2h/t2oatTjMIGNBgNVHSMEgYUwgYKAFNLEsNKR1EwRcbNhyz2h
-/t2oatTjoWekZTBjMQswCQYDVQQGEwJVUzEhMB8GA1UEChMYVGhlIEdvIERhZGR5
-IEdyb3VwLCBJbmMuMTEwLwYDVQQLEyhHbyBEYWRkeSBDbGFzcyAyIENlcnRpZmlj
-YXRpb24gQXV0aG9yaXR5ggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQAD
-ggEBADJL87LKPpH8EsahB4yOd6AzBhRckB4Y9wimPQoZ+YeAEW5p5JYXMP80kWNy
-OO7MHAGjHZQopDH2esRU1/blMVgDoszOYtuURXO1v0XJJLXVggKtI3lpjbi2Tc7P
-TMozI+gciKqdi0FuFskg5YmezTvacPd+mSYgFFQlq25zheabIZ0KbIIOqPjCDPoQ
-HmyW74cNxA9hi63ugyuV+I6ShHI56yDqg+2DzZduCLzrTia2cyvk0/ZM/iZx4mER
-dEr/VxqHD3VILs9RaRegAhJhldXRQLIQTO7ErBBDpqWeCtWVYpoNz4iCxTIM5Cuf
-ReYNnyicsbkqWletNw+vHX/bvZ8=
------END CERTIFICATE-----)";
-```
+For secure communication with Telegram, you should use their SSL certificate this can be done by including it in the constructor. You can get it from Telegram's servers using tools like `openssl` or online SSL checkers.
 
 ### 3. Basic Usage
 
@@ -111,7 +79,7 @@ void handleMessage(JsonVariant& message) {
 
 ### Constructor
 
-#### `ESP32TelegramSimple(botToken, messageHandler, rootCA)`
+#### ESP32TelegramSimple(botToken, messageHandler, rootCA)
 
 Creates a new instance of the ESP32TelegramSimple class.
 
@@ -137,7 +105,7 @@ ESP32TelegramSimple telegram(TELE_TOKEN, nullptr, telegram_root_ca);
 
 ### Methods
 
-#### `bool checkForMessages()`
+#### bool checkForMessages()
 
 Checks for new messages from Telegram and calls the message handler for each new message.
 
@@ -155,7 +123,7 @@ if (telegram.checkForMessages()) {
 }
 ```
 
-#### `bool sendMessage(String chatId, String message)`
+#### bool sendMessage(String chatId, String message)
 
 Sends a text message to a specific chat.
 
@@ -173,7 +141,7 @@ String chatId = "123456789";
 bool success = telegram.sendMessage(chatId, "Hello from ESP32!");
 ```
 
-#### `void skipOfflineMessages()`
+#### void skipOfflineMessages()
 
 Skips all messages that were sent while the bot was offline. Call this during setup to ignore old messages.
 
