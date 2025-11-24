@@ -27,7 +27,7 @@ lib_deps =
 3. Copy your bot token
 
 ### 2. SSL Certificate (optional)
-For secure communication with Telegram, you should use their SSL certificate this can be done by including it in the constructor. You can get it from Telegram's servers using tools like `openssl` or online SSL checkers.
+For secure communication with Telegram, you should use their SSL certificate, this can be done by including it in the constructor. You can get it from Telegram's servers using tools like `openssl` or online SSL checkers.
 
 ### 3. Basic Usage
 
