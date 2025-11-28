@@ -105,7 +105,7 @@ ESP32TelegramSimple telegram(TELE_TOKEN, nullptr, telegram_root_ca);
 
 ### Methods
 
-#### bool checkForMessages()
+#### int checkForMessages()
 
 Checks for new messages from Telegram and calls the message handler for each new message.
 
@@ -113,13 +113,19 @@ Checks for new messages from Telegram and calls the message handler for each new
 > Only run this method if you have set a message handling function in the constructor. Running `checkForMessages()` without a message handler will result in a crash and restart of the ESP32.
 
 **Returns:**
-- `true` if the request was successful (even if no new messages)
-- `false` if there was a network error or a parsing error
+- `> 0` - Number of new messages processed
+- `0` - No new messages available
+- `-1` - Error occurred (network failure or JSON parsing error)
 
 **Example:**
 ```cpp
-if (telegram.checkForMessages()) {
-    Serial.println("Messages checked successfully");
+int messageCount = telegram.checkForMessages();
+if (messageCount > 0) {
+    Serial.println("Processed " + String(messageCount) + " new messages");
+} else if (messageCount == 0) {
+    Serial.println("No new messages");
+} else {
+    Serial.println("Error checking for messages");
 }
 ```
 
@@ -141,15 +147,19 @@ String chatId = "123456789";
 bool success = telegram.sendMessage(chatId, "Hello from ESP32!");
 ```
 
-#### void skipOfflineMessages()
+#### bool skipOfflineMessages()
 
 Skips all messages that were sent while the bot was offline. Call this during setup to ignore old messages.
+
+**Returns:**
+- `true` if the messages were skipped successfully
+- `false` if there was an error
 
 **Example:**
 ```cpp
 void setup() {
     // ... WiFi setup ...
-    telegram.skipOfflineMessages(); // Ignore messages sent while offline
+    while (!telegram.skipOfflineMessages();) // Ignore messages sent while offline
 }
 ```
 

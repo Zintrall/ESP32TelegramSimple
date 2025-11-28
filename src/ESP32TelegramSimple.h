@@ -9,13 +9,13 @@
 class ESP32TelegramSimple{
     public:
         ESP32TelegramSimple(const char* botToken, std::function<void(JsonVariant&)> targetFunction = nullptr, const char* telegram_root_ca = "");
-        bool checkForMessages();
+        int checkForMessages();
         bool sendMessage(String id, String message);
-        void skipOfflineMessages();
+        bool skipOfflineMessages();
     private:
         const char* token;
+        unsigned long lastUpdateId;
         HTTPClient http;
         std::function<void(JsonVariant&)> onMessage;
         WiFiClientSecure client;
-        unsigned long lastUpdateId;
 };
