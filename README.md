@@ -9,7 +9,6 @@ A ESP32 library that lets you communicate with Telegram, while keeping the usage
 Add the following to your `platformio.ini` file:
 ```ini
 lib_deps =
-    ArduinoJson@^7.4.2
     https://github.com/Zintrall/ESP32TelegramSimple.git
 ```
 
