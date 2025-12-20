@@ -104,12 +104,15 @@ ESP32TelegramSimple telegram(TELE_TOKEN, nullptr, telegram_root_ca);
 
 ### Methods
 
-#### int checkForMessages()
+#### int checkForMessages(deepSearch)
 
 Checks for new messages from Telegram and calls the message handler for each new message.
 
 > **WARNING**
 > Only run this method if you have set a message handling function in the constructor. Running `checkForMessages()` without a message handler will result in a crash and restart of the ESP32.
+
+**Parameters:**
+`deepSearch` (bool) - Default true, set to false if you want the check to be fast but then you might encounter one message being checked multiple times (especially if the ESP32 goes to sleep or restarts)
 
 **Returns:**
 - `> 0` - Number of new messages processed
