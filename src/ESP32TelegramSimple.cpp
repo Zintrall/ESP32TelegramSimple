@@ -7,7 +7,7 @@ ESP32TelegramSimple::ESP32TelegramSimple(const char* botToken, std::function<voi
     token = botToken;
     lastUpdateId = 0;
 }
-int ESP32TelegramSimple::checkForMessages() {
+int ESP32TelegramSimple::checkForMessages(bool deepSearch) {
     if (WiFi.status() != WL_CONNECTED) return false;
     if (lastUpdateId==0) http.begin(client, "https://api.telegram.org/bot"+ String(token) +"/getUpdates");
     else http.begin(client, "https://api.telegram.org/bot"+ String(token) +"/getUpdates?offset="+ String(lastUpdateId + 1));
@@ -29,7 +29,11 @@ int ESP32TelegramSimple::checkForMessages() {
         JsonVariant message = update["message"];
         onMessage(message);
     }
-    return updateMessages.size() + checkForMessages();
+    if (deepSearch){
+        return updateMessages.size() + checkForMessages();
+    } else {
+        return updateMessages.size();
+    }
 }
 bool ESP32TelegramSimple::sendMessage(String id, String message) {
     if (WiFi.status() != WL_CONNECTED) return false;

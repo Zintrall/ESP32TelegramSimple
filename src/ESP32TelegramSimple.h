@@ -9,7 +9,7 @@
 class ESP32TelegramSimple{
     public:
         ESP32TelegramSimple(const char* botToken, std::function<void(JsonVariant&)> targetFunction = nullptr, const char* telegram_root_ca = "");
-        int checkForMessages();
+        int checkForMessages(bool deepSearch=true);
         bool sendMessage(String id, String message);
         bool skipOfflineMessages();
     private:
