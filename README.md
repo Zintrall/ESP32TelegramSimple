@@ -212,8 +212,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Support
-
-If you encounter any issues or have questions, please open an issue on GitHub.
+Contributions are welcome. Please feel free to submit a Pull Request.
